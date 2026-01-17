@@ -19,6 +19,7 @@ BuildRequires: python3-cffi
 BuildRequires: python3-pip
 BuildRequires: python3-wheel
 BuildRequires: python3-build
+BuildRequires: jack-audio-connection-kit
 %{?python_provide:%python_provide %{name}}
 Requires:      python3-cffi
 Requires:      jack-audio-connection-kit
