@@ -43,11 +43,11 @@ This package installs the library for Python.
 %{__python3} -m pip install --no-deps --root %{buildroot} --prefix /usr dist/jack_client-*.whl
 
 %check
-# Create a venv that can access system site-packages and run a minimal import test
-%{__python3} -m venv --system-site-packages .venv
-.venv/bin/pip install --no-deps dist/jack_client-*.whl
-.venv/bin/python - <<'PY'
-import importlib, sys
+# Run the import test with the buildroot site-packages so compiled
+# backends from BuildRequires (e.g. _cffi_backend) are available.
+%{__python3} - <<'PY'
+import sys, importlib
+sys.path.insert(0, '%{buildroot}%{python3_sitelib}')
 try:
     importlib.import_module('jack')
 except Exception as e:
