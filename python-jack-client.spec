@@ -48,7 +48,7 @@ This package installs the library for Python.
 %check
 # Use %pyproject_test when available (CI). Fall back to a simple import check locally.
 %{?pyproject_test:%pyproject_test}
-%{!?pyproject_test:python3 -c 'import importlib; importlib.import_module("jack"); importlib.import_module("_jack")'}
+%{!?pyproject_test:python3 -c 'import sys, importlib; sys.path.insert(0, "%{buildroot}%{python3_sitelib}"); importlib.import_module("jack"); importlib.import_module("_jack")'}
 
 %files -f %{pyproject_files}
 %license LICENSE
