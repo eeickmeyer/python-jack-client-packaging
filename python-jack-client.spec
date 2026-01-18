@@ -19,7 +19,7 @@ BuildRequires: python3-cffi
 BuildRequires: python3-pip
 BuildRequires: python3-wheel
 BuildRequires: python3-build
-BuildRequires: jack-audio-connection-kit
+BuildRequires: jack-audio-connection-kit-devel
 %{?python_provide:%python_provide %{name}}
 Requires:      python3-cffi
 Requires:      jack-audio-connection-kit
@@ -37,7 +37,7 @@ This package installs the library for Python.
 
 %build
 # Build a wheel using pip (PEP 517-aware) to avoid setup.py deprecation warnings
-%{__python3} -m pip wheel --no-deps . -w dist
+%{__python3} -m pip wheel --no-deps --no-build-isolation . -w dist
 
 %install
 # Install the built wheel into the RPM buildroot
